@@ -1,0 +1,30 @@
+{
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "region": "us-east-1",
+            "access_key": "",
+            "secret_key": "",
+            "subnet_id": "",
+            "security_group_id": "",
+            "source_ami_filter": {
+                "filters": {
+                    "virtualization_type": "hvm",
+                    "name": "ubuntu/images/*ubuntu-focal-20.04-amd64-server-*",
+                    "root-device-type": "ebs"
+                },
+                "owners": "0997200109477",
+                "most_recent": true
+            },
+            "instance_type": "t2.micro",
+            "ssh_username": "ubuntu",
+            "ami_name": "ubuntu-build--{{timestamp}}"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "install-docker.sh"
+        }
+    ]
+}
